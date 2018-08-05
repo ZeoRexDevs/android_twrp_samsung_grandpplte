@@ -17,7 +17,7 @@ before_script:
     -d $HOME/ -o twrp.tar.xz
   - tar -xJf twrp.tar.xz --directory $HOME/twrp/ && rm twrp.tar.xz
 script:
-  - cd $HOME/twrp/ && git clone https://github.com/ZeoRexDevs/android_device_samsung_grandpplte.git device/samsung/grandpplte
+  - cd $HOME/twrp/ && git clone https://github.com/ZeoRexDevs/android_twrp_samsung_grandpplte.git device/samsung/grandpplte
   - git clone https://github.com/TwrpBuilder/android_device_generic_twrpbuilder.git device/generic/twrpbuilder
   - rm -rf bootable/recovery && git clone https://github.com/omnirom/android_bootable_recovery.git bootable/recovery --depth=1
   - |
@@ -29,7 +29,7 @@ script:
 after_success:
   - export version=$(cat bootable/recovery/variables.h | grep "define TW_MAIN_VERSION_STR" | cut -d '"' -f2)
   - cp $HOME/twrp/out/target/product/grandpplte/recovery.img $HOME/twrp/TWRP-$version-grandpplte-$(date +"%Y%m%d").img
-  - cd $HOME/twrp/ && wput TWRP-$version-gionee6735_65u_m0-$(date +"%Y%m%d").img ftp://"$FTPUser":"$FTPPass"@"$FTPHost"//grandpplte/
+  - cd $HOME/twrp/ && wput TWRP-$version-grandpplte-$(date +"%Y%m%d").img ftp://"$FTPUser":"$FTPPass"@"$FTPHost"//grandpplte/
 
 deploy:
   skip_cleanup: true
